@@ -1045,8 +1045,8 @@ class AzureActions:
                 '/')[0]
             private_ip = datalab.meta_lib.AzureMeta().check_free_ip(resource_group_name, vpc_name, subnet_cidr)
             subnet_id = datalab.meta_lib.AzureMeta().get_subnet(resource_group_name, vpc_name, subnet_name).id
-            security_group_id = datalab.meta_lib.AzureMeta().get_security_group(resource_group_name,
-                                                                                security_group_name).id
+            security_group = datalab.meta_lib.AzureMeta().get_security_group(resource_group_name, security_group_name)
+
             if public_ip_name == "None":
                 ip_params = [{
                     "name": interface_name,
@@ -1071,17 +1071,24 @@ class AzureActions:
                         "id": subnet_id
                     }
                 }]
+
+            create_update_json = {
+                "location": region,
+                "tags": tags,
+                "ip_configurations": ip_params
+            }
+
+            if not security_group and ("azure_disable_project_SG_creation" not in os.environ):
+                raise Exception
+            elif not security_group and ("azure_disable_project_SG_creation" in os.environ):
+                pass
+            elif security_group and ("azure_disable_project_SG_creation" in os.environ):
+                create_update_json["network_security_group"] = {"id": security_group.id}
+
             result = self.network_client.network_interfaces.begin_create_or_update(
                 resource_group_name,
                 interface_name,
-                {
-                    "location": region,
-                    "tags": tags,
-                    "network_security_group": {
-                        "id": security_group_id
-                    },
-                    "ip_configurations": ip_params
-                }
+                create_update_json
             ).wait()
             network_interface_id = datalab.meta_lib.AzureMeta().get_network_interface(
                 resource_group_name,

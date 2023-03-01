@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
         logging.info('[CREATING DATALAB SSH USER]')
         params = "--hostname {} --keyfile {} --initial_user {} --os_user {} --sudo_group {}".format(
-            edge_conf['instance_hostname'], os.environ['conf_key_dir'] + os.environ['conf_key_name'] + ".pem",
+            edge_conf['edge_private_ip'], os.environ['conf_key_dir'] + os.environ['conf_key_name'] + ".pem",
             edge_conf['initial_user'], edge_conf['datalab_ssh_user'], edge_conf['sudo_group'])
 
         try:
@@ -161,7 +161,7 @@ if __name__ == "__main__":
     try:
         logging.info('[INSTALLING PREREQUISITES]')
         params = "--hostname {} --keyfile {} --user {} --region {}".format(
-            edge_conf['instance_hostname'], edge_conf['keyfile_name'], edge_conf['datalab_ssh_user'],
+            edge_conf['edge_private_ip'], edge_conf['keyfile_name'], edge_conf['datalab_ssh_user'],
             os.environ['azure_region'])
         try:
             subprocess.run("~/scripts/{}.py {}".format('install_prerequisites', params), shell=True, check=True)
@@ -185,7 +185,7 @@ if __name__ == "__main__":
                              "vpc_cidrs": edge_conf['vpc_cidrs'],
                              "allowed_ip_cidr": ['0.0.0.0/0']}
         params = "--hostname {} --keyfile {} --additional_config '{}' --user {}".format(
-            edge_conf['instance_hostname'], edge_conf['keyfile_name'], json.dumps(additional_config),
+            edge_conf['edge_private_ip'], edge_conf['keyfile_name'], json.dumps(additional_config),
             edge_conf['datalab_ssh_user'])
         try:
             subprocess.run("~/scripts/{}.py {}".format('configure_http_proxy', params), shell=True, check=True)
@@ -203,7 +203,7 @@ if __name__ == "__main__":
         additional_config = {"user_keyname": edge_conf['user_keyname'],
                              "user_keydir": os.environ['conf_key_dir']}
         params = "--hostname {} --keyfile {} --additional_config '{}' --user {}".format(
-            edge_conf['instance_hostname'], edge_conf['keyfile_name'], json.dumps(additional_config),
+            edge_conf['edge_private_ip'], edge_conf['keyfile_name'], json.dumps(additional_config),
             edge_conf['datalab_ssh_user'])
         try:
             subprocess.run("~/scripts/{}.py {}".format('install_user_key', params), shell=True, check=True)
@@ -220,7 +220,7 @@ if __name__ == "__main__":
         edge_conf['keycloak_client_secret'] = str(uuid.uuid4())
         params = "--hostname {} --keyfile {} --user {} --keycloak_client_id {} --keycloak_client_secret {} " \
                  "--step_cert_sans '{}'".format(
-            edge_conf['instance_hostname'], edge_conf['keyfile_name'], edge_conf['datalab_ssh_user'],
+            edge_conf['edge_private_ip'], edge_conf['keyfile_name'], edge_conf['datalab_ssh_user'],
             edge_conf['service_base_name'] + '-' + edge_conf['project_name'] + '-' + edge_conf['endpoint_name'],
             edge_conf['keycloak_client_secret'], edge_conf['step_cert_sans'])
 

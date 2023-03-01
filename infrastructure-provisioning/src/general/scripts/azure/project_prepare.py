@@ -199,11 +199,11 @@ if __name__ == "__main__":
             params = "--resource_group_name {} --security_group_name {} --region {} --tags '{}' --list_rules '{}'". \
                 format(project_conf['resource_group_name'], os.environ['azure_edge_security_group_name'],
                        project_conf['region'], json.dumps({"product": "datalab"}), json.dumps(edge_list_rules))
-            try:
-                subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
-            except Exception as err:
-                AzureActions.remove_subnet(project_conf['resource_group_name'], project_conf['vpc_name'],
-                                           project_conf['private_subnet_name'])
+            # try:
+            #     subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
+            # except Exception as err:
+            #     AzureActions.remove_subnet(project_conf['resource_group_name'], project_conf['vpc_name'],
+            #                                project_conf['private_subnet_name'])
         else:
             logging.info('[CREATE SECURITY GROUP FOR EDGE NODE]')
             logging.info('[CREATE SECURITY GROUP FOR EDGE]')
@@ -476,19 +476,19 @@ if __name__ == "__main__":
             params = "--resource_group_name {} --security_group_name {} --region {} --tags '{}' --list_rules '{}'". \
                 format(project_conf['resource_group_name'], project_conf['edge_security_group_name'],
                        project_conf['region'], json.dumps(project_conf['instance_tags']), json.dumps(edge_list_rules))
-            try:
-                subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
-            except Exception as err:
-                AzureActions.remove_subnet(project_conf['resource_group_name'], project_conf['vpc_name'],
-                                           project_conf['private_subnet_name'])
-                try:
-                    AzureActions.remove_security_group(project_conf['resource_group_name'],
-                                                       project_conf['edge_security_group_name'])
-                except:
-                    logging.info("Edge Security group hasn't been created.")
-                traceback.print_exc()
-                datalab.fab.append_result("Failed creating security group for edge node.", str(err))
-                raise Exception
+            # try:
+            #     subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
+            # except Exception as err:
+            #     AzureActions.remove_subnet(project_conf['resource_group_name'], project_conf['vpc_name'],
+            #                                project_conf['private_subnet_name'])
+            #     try:
+            #         AzureActions.remove_security_group(project_conf['resource_group_name'],
+            #                                            project_conf['edge_security_group_name'])
+            #     except:
+            #         logging.info("Edge Security group hasn't been created.")
+            #     traceback.print_exc()
+            #     datalab.fab.append_result("Failed creating security group for edge node.", str(err))
+            #     raise Exception
     except:
         traceback.print_exc()
         sys.exit(1)
@@ -581,11 +581,11 @@ if __name__ == "__main__":
         params = "--resource_group_name {} --security_group_name {} --region {} --tags '{}' --list_rules '{}'". \
             format(project_conf['resource_group_name'], project_conf['notebook_security_group_name'],
                    project_conf['region'], json.dumps(project_conf['instance_tags']), json.dumps(notebook_list_rules))
-        try:
-            subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
-        except:
-            traceback.print_exc()
-            raise Exception
+        # try:
+        #     subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
+        # except:
+        #     traceback.print_exc()
+        #     raise Exception
     except Exception as err:
         datalab.fab.append_result("Failed creating security group for private subnet.", str(err))
         AzureActions.remove_subnet(project_conf['resource_group_name'], project_conf['vpc_name'],
@@ -688,11 +688,11 @@ if __name__ == "__main__":
         params = "--resource_group_name {} --security_group_name {} --region {} --tags '{}' --list_rules '{}'".format(
             project_conf['resource_group_name'], project_conf['master_security_group_name'], project_conf['region'],
             json.dumps(project_conf['instance_tags']), json.dumps(cluster_list_rules))
-        try:
-            subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
-        except:
-            traceback.print_exc()
-            raise Exception
+        # try:
+        #     subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
+        # except:
+        #     traceback.print_exc()
+        #     raise Exception
     except Exception as err:
         AzureActions.remove_subnet(project_conf['resource_group_name'], project_conf['vpc_name'],
                                    project_conf['private_subnet_name'])
@@ -714,11 +714,11 @@ if __name__ == "__main__":
         params = "--resource_group_name {} --security_group_name {} --region {} --tags '{}' --list_rules '{}'".format(
             project_conf['resource_group_name'], project_conf['slave_security_group_name'], project_conf['region'],
             json.dumps(project_conf['instance_tags']), json.dumps(cluster_list_rules))
-        try:
-            subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
-        except:
-            traceback.print_exc()
-            raise Exception
+        # try:
+        #     subprocess.run("~/scripts/{}.py {}".format('common_create_security_group', params), shell=True, check=True)
+        # except:
+        #     traceback.print_exc()
+        #     raise Exception
     except Exception as err:
         AzureActions.remove_subnet(project_conf['resource_group_name'], project_conf['vpc_name'],
                                    project_conf['private_subnet_name'])
