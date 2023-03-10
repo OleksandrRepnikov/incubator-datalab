@@ -1078,9 +1078,9 @@ class AzureActions:
                 "ip_configurations": ip_params
             }
 
-            if not security_group and ("azure_disable_project_SG_creation" not in os.environ):
-                raise Exception
-            elif not security_group and ("azure_disable_project_SG_creation" in os.environ):
+#            if not security_group and ("azure_disable_project_SG_creation" not in os.environ):
+#                raise Exception
+            if not security_group and ("azure_disable_project_SG_creation" in os.environ):
                 pass
             elif security_group and ("azure_disable_project_SG_creation" in os.environ):
                 create_update_json["network_security_group"] = {"id": security_group.id}
