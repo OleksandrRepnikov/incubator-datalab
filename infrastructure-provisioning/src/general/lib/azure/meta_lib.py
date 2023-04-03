@@ -396,8 +396,8 @@ class AzureMeta:
                 vpc_name,
                 ip_address
             )
+            logging.info("HERE:" + ip_address)
             if not result.available:
-                print("HERE:" + result.available_ip_addresses[0])
                 return self.check_free_ip(resource_group_name, vpc_name, result.available_ip_addresses[0])
             if result.available:
                 return ip_address
