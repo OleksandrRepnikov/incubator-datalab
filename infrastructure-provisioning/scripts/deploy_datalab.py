@@ -227,7 +227,7 @@ def build_parser():
     azure_parser.add_argument('--azure_security_group_name', type=str, help='One Security group name for SSN')
     azure_parser.add_argument('--azure_edge_security_group_name', type=str,
                               help='One Security group name for Edge node')
-    azure_parser.add_argument('--azure_disable_project_SG_creation', type=str,
+    azure_parser.add_argument('--azure_disable_project_sg_creation', type=str,
                               help='Disable the creation of a security group')
     azure_parser.add_argument('--azure_resource_group_name', type=str, help='Name of Resource group in Azure')
     azure_parser.add_argument('--azure_datalake_enable', type=str, default='false', choices=BOOL_CHOICES_LIST,
