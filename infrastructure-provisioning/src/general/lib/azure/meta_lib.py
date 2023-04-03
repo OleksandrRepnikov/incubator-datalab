@@ -402,9 +402,9 @@ class AzureMeta:
                 return ip_address
         except Exception as err:
             logging.info(
-                "Unable to check private ip: " + str(err) + "\n Traceback: " + traceback.print_exc(file=sys.stdout))
+                "Unable to check private ip: "  + "\n Traceback: " + traceback.print_exc(file=sys.stdout))
             append_result(str({"error": "Unable to check private ip",
-                               "error_message": str(err) + "\n Traceback: " + traceback.print_exc(
+                               "error_message": + "\n Traceback: " + traceback.print_exc(
                                    file=sys.stdout)}))
             traceback.print_exc(file=sys.stdout)
 
