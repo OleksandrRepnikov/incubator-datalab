@@ -1081,13 +1081,13 @@ class AzureActions:
 #            if not security_group and ("azure_disable_project_sg_creation" not in os.environ):
 #                raise Exception
             if not security_group and ("azure_disable_project_sg_creation" in os.environ):
-                print("1")
+                logging.error("1LOG")
                 pass
             elif security_group and ("azure_disable_project_sg_creation" in os.environ):
                 create_update_json["network_security_group"] = {"id": security_group.id}
-                print("2")
+                logging.error("2LOG")
 
-            print(security_group.id)
+            logging.error(security_group.id)
 
             result = self.network_client.network_interfaces.begin_create_or_update(
                 resource_group_name,
