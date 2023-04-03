@@ -1043,6 +1043,9 @@ class AzureActions:
             subnet_cidr = \
             datalab.meta_lib.AzureMeta().get_subnet(resource_group_name, vpc_name, subnet_name).address_prefix.split(
                 '/')[0]
+            print("RESOURCE:" + resource_group_name)
+            print("VPC:" + vpc_name)
+            print("SUBNET" + subnet_cidr)
             private_ip = datalab.meta_lib.AzureMeta().check_free_ip(resource_group_name, vpc_name, subnet_cidr)
             subnet_id = datalab.meta_lib.AzureMeta().get_subnet(resource_group_name, vpc_name, subnet_name).id
             security_group = datalab.meta_lib.AzureMeta().get_security_group(resource_group_name, security_group_name)
@@ -1081,13 +1084,9 @@ class AzureActions:
 #            if not security_group and ("azure_disable_project_sg_creation" not in os.environ):
 #                raise Exception
             if not security_group and ("azure_disable_project_sg_creation" in os.environ):
-                logging.error("1LOG")
                 pass
             elif security_group and ("azure_disable_project_sg_creation" in os.environ):
                 create_update_json["network_security_group"] = {"id": security_group.id}
-                logging.error("2LOG")
-
-            logging.error(security_group.id)
 
             result = self.network_client.network_interfaces.begin_create_or_update(
                 resource_group_name,
