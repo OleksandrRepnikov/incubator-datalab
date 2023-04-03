@@ -397,15 +397,17 @@ class AzureMeta:
                 ip_address
             )
             if not result.available:
-                print(result.available_ip_addresses[0])
+                print("HERE:" + result.available_ip_addresses[0])
                 return self.check_free_ip(resource_group_name, vpc_name, result.available_ip_addresses[0])
             if result.available:
                 return ip_address
         except Exception as err:
             logging.info(
-                "Unable to check private ip: " + str(err) + "\n Traceback: ")
+                "Unable to check private ip: " + str(err) + "\n Traceback: " + traceback.print_exc(file=sys.stdout))
             append_result(str({"error": "Unable to check private ip",
-                               "error_message": str(err) + "\n Traceback: "}))
+                               "error_message": str(err) + "\n Traceback: " + traceback.print_exc(
+                                   file=sys.stdout)}))
+            traceback.print_exc(file=sys.stdout)
 
     def get_instance_public_ip_address(self, resource_group_name, instance_name):
         try:

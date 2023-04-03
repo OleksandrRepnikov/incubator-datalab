@@ -1043,9 +1043,6 @@ class AzureActions:
             subnet_cidr = \
             datalab.meta_lib.AzureMeta().get_subnet(resource_group_name, vpc_name, subnet_name).address_prefix.split(
                 '/')[0]
-            print("RESOURCE:" + resource_group_name)
-            print("VPC:" + vpc_name)
-            print("SUBNET" + subnet_cidr)
             private_ip = datalab.meta_lib.AzureMeta().check_free_ip(resource_group_name, vpc_name, subnet_cidr)
             subnet_id = datalab.meta_lib.AzureMeta().get_subnet(resource_group_name, vpc_name, subnet_name).id
             security_group = datalab.meta_lib.AzureMeta().get_security_group(resource_group_name, security_group_name)
