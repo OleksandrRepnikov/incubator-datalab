@@ -1078,6 +1078,8 @@ class AzureActions:
                 "ip_configurations": ip_params
             }
 
+            if not security_group and ("azure_disable_project_SG_creation" not in os.environ):
+                raise Exception
             if not security_group and ("azure_disable_project_SG_creation" in os.environ):
                 pass
             elif security_group and ("azure_disable_project_SG_creation" in os.environ):
