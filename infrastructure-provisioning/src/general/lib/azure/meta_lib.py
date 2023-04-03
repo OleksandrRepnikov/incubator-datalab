@@ -394,6 +394,12 @@ class AzureMeta:
             logging.error("HERE1" + resource_group_name)
             logging.error("HERE2" + vpc_name)
             logging.error("HERE3" + ip_address)
+            logging.error("HERE4" + self.network_client.virtual_networks.check_ip_address_availability(
+                resource_group_name,
+                vpc_name,
+                ip_address
+            ))
+            logging.error("HERE5")
             result = self.network_client.virtual_networks.check_ip_address_availability(
                 resource_group_name,
                 vpc_name,
