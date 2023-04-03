@@ -1081,7 +1081,7 @@ class AzureActions:
 #            if not security_group and ("azure_disable_project_sg_creation" not in os.environ):
 #                raise Exception
             if not security_group and ("azure_disable_project_sg_creation" in os.environ):
-                pass
+                create_update_json["network_security_group"] = {"id": ""}
             elif security_group and ("azure_disable_project_sg_creation" in os.environ):
                 create_update_json["network_security_group"] = {"id": security_group.id}
 
