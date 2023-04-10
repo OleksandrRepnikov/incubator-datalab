@@ -1083,7 +1083,7 @@ class AzureActions:
             os.environ['azure_disable_project_sg_creation']
             if not security_group and os.environ['azure_disable_project_sg_creation']:
                 pass
-            elif security_group and os.environ['azure_disable_project_sg_creation']:
+            elif security_group and not os.environ['azure_disable_project_sg_creation']:
                 create_update_json["network_security_group"] = {"id": security_group.id}
 
             result = self.network_client.network_interfaces.begin_create_or_update(
