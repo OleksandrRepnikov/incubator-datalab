@@ -390,18 +390,14 @@ class AzureMeta:
             traceback.print_exc(file=sys.stdout)
 
     def check_free_ip(self, resource_group_name, vpc_name, ip_address):
+        print("HERE1" + ip_address)
         try:
-            if not self.network_client.virtual_networks.check_ip_address_availability(
-                resource_group_name,
-                vpc_name,
-                ip_address
-            ):
-                logging.error("RESULT IS NON TYPE")
             result = self.network_client.virtual_networks.check_ip_address_availability(
                 resource_group_name,
                 vpc_name,
                 ip_address
             )
+            print("HERE2" + result)
             if not result.available:
                 return self.check_free_ip(resource_group_name, vpc_name, result.available_ip_addresses[0])
             if result.available:
