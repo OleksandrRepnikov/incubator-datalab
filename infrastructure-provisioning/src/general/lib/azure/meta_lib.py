@@ -392,11 +392,12 @@ class AzureMeta:
     def check_free_ip(self, resource_group_name, vpc_name, ip_address):
         print("HERE1" + ip_address)
         try:
-            result = self.network_client.virtual_networks.check_ip_address_availability(
-                resource_group_name,
-                vpc_name,
-                ip_address
-            )
+            # result = self.network_client.virtual_networks.check_ip_address_availability(
+            #     resource_group_name,
+            #     vpc_name,
+            #     ip_address
+            # )
+            result = self.network_client.virtual_networks.check_ip_address_availability("dlab-resource-group", "dlab-vpc", "172.31.0.0")
             print("HERE2" + result)
             if not result.available:
                 return self.check_free_ip(resource_group_name, vpc_name, result.available_ip_addresses[0])
