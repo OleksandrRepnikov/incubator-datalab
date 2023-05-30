@@ -1,0 +1,21 @@
+#idea stuff
+*.iml
+.idea
+target
+.DS_Store
+
+#eclipse stuff
+.classpath
+.project
+.settings
+/services/common/bin
+/services/provisioning-service/bin
+/services/security-service/bin
+/services/self-service/bin
+/services/provisioning-service/response
+
+/services/self-service/src/main/resources/webapp/ts-node-*
+/web_app
+/integration-tests/examples/keys
+/integration-tests/test-output
+/integration-tests/output.log
